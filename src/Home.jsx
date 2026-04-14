@@ -57,7 +57,7 @@ const handleSubmit = async (e) => {
         recaptchaToken: recaptchaRef.current?.getValue() || ""
       }
     );
-
+    console.log("recaptchaToken:", recaptchaRef.current?.getValue() || "");
     console.log("Success:", response.data);
 
     navigate("/thankyou");
