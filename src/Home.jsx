@@ -28,7 +28,9 @@ export default function Home() {
   const [captchaToken, setCaptchaToken] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const recaptchaRef = useRef();
-  const navigate = useNavigate();  
+  const navigate = useNavigate(); 
+  
+  const [gclid, setGclid] = useState("");
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -48,7 +50,7 @@ const handleSubmit = async (e) => {
 
         PropertyName: "JMC Broadway",      // ✅ hardcoded
         PropertyId: "491",             // ✅ from hidden field
-        gclid_field: "",               // keep empty if not using ads
+        gclid_field: gclid || "",               // keep empty if not using ads
         form_type: "REQ",         // or "Sidebar Form"
 
         PropertyTypeId: "1",           // ask if unsure
@@ -86,7 +88,7 @@ const handleDownloadSubmit = async (e) => {
         Message: formDownloadData.message || "",
         PropertyName: "JMC Broadway",
         PropertyId: "491",
-        gclid_field: "",
+        gclid_field: gclid || "",
         form_type: "EBRCREQ",
         PropertyTypeId: "1",
         rPropertyType: "Residential",
@@ -316,6 +318,25 @@ const isDownloadFormValid =
 
     return () => clearInterval(interval); // cleanup
   }, []);
+
+  useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const gclidParam = params.get("gclid");
+
+  if (gclidParam) {
+    console.log("gclid:", gclidParam);
+    setGclid(gclidParam);
+
+    // Optional: store in localStorage (recommended)
+    localStorage.setItem("gclid", gclidParam);
+  } else {
+    // fallback if user navigates internally
+    const storedGclid = localStorage.getItem("gclid");
+    if (storedGclid) {
+      setGclid(storedGclid);
+    }
+  }
+}, []);
 
   return (
     <>
