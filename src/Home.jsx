@@ -25,6 +25,7 @@ export default function Home() {
   const [showDisclaimerModal, setShowDisclaimerModal] = useState(false);
   const [isSidebarActive, setIsSidebarActive] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const recaptchaRef = useRef();
   const navigate = useNavigate();  
@@ -54,10 +55,10 @@ const handleSubmit = async (e) => {
         rPropertyType: "Residential",  // ✅
         SubPropertyTypeId: "1",        // ask if unsure
         SubPropertyType: "Flat/Apartment",        
-        recaptchaToken: recaptchaRef.current?.getValue() || ""
+        recaptchaToken: captchaToken
       }
     );
-    console.log("recaptchaToken:", recaptchaRef.current?.getValue() || "");
+    console.log("recaptchaToken:", captchaToken);
     console.log("Success:", response.data);
 
     navigate("/thankyou");
@@ -116,6 +117,7 @@ const handleDownloadSubmit = async (e) => {
   const onCaptchaChange = (value) => {
     if (value) {
       setCaptchaVerified(true);
+      setCaptchaToken(value); // ✅ SAVE TOKEN HERE
       // Your logic to hide it after callback
       console.log("Captcha Value:", value);
     }
