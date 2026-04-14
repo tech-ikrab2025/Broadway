@@ -14,7 +14,7 @@ import lgZoom from "lightgallery/plugins/zoom";
 import "lightgallery/css/lg-thumbnail.css"; // Add this for thumbnails
 import "lightgallery/css/lg-zoom.css";
 import axios from "axios";
-//98320 sir er no
+
 export default function Home() {
 
   const [readMore, setReadMore] = useState(false);
@@ -27,35 +27,7 @@ export default function Home() {
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const recaptchaRef = useRef();
-  const navigate = useNavigate();
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-    
-  //   if (validateDownloadField()) {
-  //     // 1. Trigger the brochure download
-  //     const link = document.createElement('a');
-  //     link.href = "/eBrochure/merlinserenia.pdf"; // Path to your file in public/ebrochure/
-  //     link.download = "Broadway_Brochure.pdf"; // The name the file will save as
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     document.body.removeChild(link);
-
-  //     // 2. Redirect to the Thank You page
-  //     navigate("/thankyou"); 
-  //   }
-  // };
-
-//   const handleSubmit = (e) => {
-//   e.preventDefault();
-
-//   if (!isFormValid) {
-//     return; // ❌ stop if invalid
-//   }
-
-//   // ✅ only runs if valid
-//   navigate("/thankyou");
-// };
+  const navigate = useNavigate();  
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -73,17 +45,15 @@ const handleSubmit = async (e) => {
 
         Message: formData.message || "",
 
-        PropertyName: "Broadway",      // ✅ hardcoded
-        PropertyId: "309",             // ✅ from hidden field
+        PropertyName: "JMC Broadway",      // ✅ hardcoded
+        PropertyId: "491",             // ✅ from hidden field
         gclid_field: "",               // keep empty if not using ads
-        form_type: "REQ",          // or "Sidebar Form"
+        form_type: "REQ",         // or "Sidebar Form"
 
         PropertyTypeId: "1",           // ask if unsure
         rPropertyType: "Residential",  // ✅
         SubPropertyTypeId: "1",        // ask if unsure
-        SubPropertyType: "Flat/Apartment",
-
-        //recaptchaToken: recaptchaRef.current.getValue() // 🔥 IMPORTANT
+        SubPropertyType: "Flat/Apartment",        
         recaptchaToken: recaptchaRef.current?.getValue() || ""
       }
     );
@@ -97,39 +67,6 @@ const handleSubmit = async (e) => {
     alert("Submission failed!");
   }
 };
-
-//   const handleDownloadSubmit = (e) => {
-//   e.preventDefault();
-
-//   if (validateDownloadField()) {
-//     const link = document.createElement("a");
-//     link.href = "/eBrochure/merlinserenia.pdf"; // ✅ correct path
-//     link.download = "Broadway_Brochure.pdf";
-//     document.body.appendChild(link);
-//     link.click();
-//     document.body.removeChild(link);
-
-//     navigate("/thankyou");
-//   }
-// };
-
-// const handleDownloadSubmit = (e) => {
-//   e.preventDefault();
-
-//   const isValid = validateDownloadField();
-
-//   if (!isValid) return; // ❌ stops and shows errors
-
-//   // ✅ Download + redirect
-//   const link = document.createElement("a");
-//   link.href = "/eBrochure/merlinserenia.pdf";
-//   link.download = "Broadway_Brochure.pdf";
-//   document.body.appendChild(link);
-//   link.click();
-//   document.body.removeChild(link);
-
-//   navigate("/thankyou");
-// };
 
 const handleDownloadSubmit = async (e) => {
   e.preventDefault();
@@ -145,19 +82,15 @@ const handleDownloadSubmit = async (e) => {
         Email: formDownloadData.email,
         ContactNumber: formDownloadData.phone,
         IsdCode: "91",
-
         Message: formDownloadData.message || "",
-
-        PropertyName: "Broadway",
-        PropertyId: "309",
+        PropertyName: "JMC Broadway",
+        PropertyId: "491",
         gclid_field: "",
         form_type: "EBRCREQ",
-
         PropertyTypeId: "1",
         rPropertyType: "Residential",
         SubPropertyTypeId: "1",
         SubPropertyType: "Flat/Apartment",
-
         recaptchaToken: "" // optional if not using captcha here
       }
     );
@@ -167,7 +100,7 @@ const handleDownloadSubmit = async (e) => {
     // ✅ Download after API success
     const link = document.createElement("a");
     link.href = "/eBrochure/JMCBROADWAY.pdf";
-    link.download = "Broadway_Brochure.pdf";
+    link.download = "JMCBROADWAY.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -238,32 +171,6 @@ const [formDownloadData, setDownloadFormData] = useState({
     setFormData(prev => ({ ...prev, [name]: value }));
     validateField(name, value);
   };
-
-//   const validateDownloadField = () => {
-//   let isValid = true;
-//   let newErrors = {};
-
-//   if (!formDownloadData.fullName) {
-//     newErrors.fullName = "Please Enter Name";
-//     isValid = false;
-//   }
-
-//   if (!formDownloadData.phone || formDownloadData.phone.length !== 10) {
-//     newErrors.phone = "Enter valid 10 digit number";
-//     isValid = false;
-//   }
-
-//   if (
-//     formDownloadData.email &&
-//     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formDownloadData.email)
-//   ) {
-//     newErrors.email = "Invalid email";
-//     isValid = false;
-//   }
-
-//   downloadsetErrors(newErrors);
-//   return isValid;
-// };
 
 const validateDownloadField = () => {
   let newErrors = {};
@@ -427,13 +334,13 @@ const isDownloadFormValid =
           <div className="row">
             <div className="col-lg-4 col-sm-12">
               <div className="modal_logo">
-                <img src="/images/logo.webp" alt="Broadway E-Brochure" />
+                <img src="/images/logo.webp" alt="JMC Broadway E-Brochure" />
               </div>
             </div>
 
             <div className="col-lg-8 col-sm-12">
               <h6 className="modal-head">
-                Are you interested about <span>Broadway?</span>
+                Are you interested about <span>JMC Broadway?</span>
               </h6>
             </div>
           </div>
@@ -526,7 +433,7 @@ const isDownloadFormValid =
             {!captchaVerified ? (
               <div className="mb-3 d-flex justify-content-center">
                 <ReCAPTCHA
-                  sitekey="6LcNhFsrAAAAAHzTGS8sC3eR9pl-6WQZLrfpJjgG"
+                  sitekey="6LfR97YsAAAAAIUpNzSYkFhuS2r77MEI8sUZqJ7s"
                   onChange={onCaptchaChange}
                   ref={recaptchaRef}
                 />
@@ -536,8 +443,8 @@ const isDownloadFormValid =
             )}
 
             {/* Hidden fields */}
-            <input type="hidden" value="309" />
-            <input type="hidden" value="Broadway" />
+            <input type="hidden" value="491" />
+            <input type="hidden" value="JMC Broadway" />
             <input type="hidden" value="Residential" />
 
             {/* Submit */}
@@ -666,7 +573,7 @@ const isDownloadFormValid =
       <section className="banner_area">
         <img src="/images/banner.webp" alt="" />
         <div className="container">
-          <h1>Broadway</h1>
+          <h1>JMC Broadway</h1>
           <p>Discover the epitome of luxury living surrounded by nature</p>
           <h3>
             <i className="fa-solid fa-location-dot"></i> Saltlake Sector V
@@ -758,7 +665,7 @@ const isDownloadFormValid =
                 </ul>
 
                 <p>
-                  Broadway, located in Saltlake Sector V, is a prestigious residential
+                  JMC Broadway, located in Saltlake Sector V, is a prestigious residential
                   property offering a range of 2, 3, and 4 BHK flats. It blends luxury
                   and affordability seamlessly, making it an attractive choice for
                   homebuyers.
@@ -1282,7 +1189,7 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
               <div className="copy_area">
                 <div className="row">
                   <div className="col-md-6">
-                    <p>© 2026-27 Broadway. All rights reserved.</p>
+                    <p>© 2026-27 JMC Broadway. All rights reserved.</p>
                   </div>
 
                   <div className="col-md-6">
@@ -1298,7 +1205,7 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
       </section>
 <div id="whatsAppDiv" className="whatsapp_area">
     <a 
-      href="https://api.whatsapp.com/send?phone=919832064905&text=Hi there, Interest In Broadway Property!" 
+      href="https://api.whatsapp.com/send?phone=919832064905&text=Hi there, Interest In JMC Broadway Property!" 
       target="_blank" 
       rel="noopener noreferrer"
     >
@@ -1322,13 +1229,13 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
                 <div className="row w-100">
                   <div className="col-md-4">
                     <div className="modal_logo">
-                      <img src="/images/logo.webp" alt="Broadway" />
+                      <img src="/images/logo.webp" alt="JMC Broadway" />
                     </div>
                   </div>
 
                   <div className="col-md-8">
                     <h6 className="modal-head">
-                      Are you interested about <span>Broadway?</span>
+                      Are you interested about <span>JMC Broadway?</span>
                     </h6>
                   </div>
                 </div>
@@ -1434,8 +1341,8 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
                     </div>
 
                     {/* HIDDEN FIELDS */}
-                    <input type="hidden" value="309" />
-                    <input type="hidden" value="Broadway" />
+                    <input type="hidden" value="491" />
+                    <input type="hidden" value="JMC Broadway" />
                     <input type="hidden" value="Residential" />
                     <input type="hidden" value="Flat/Apartment" />
 
@@ -1457,7 +1364,7 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
 
       {/* FOOTER */}
       {/* <footer className="footer_area text-center">
-        <p>© 2024 Broadway. All rights reserved.</p>
+        <p>© 2024 JMC Broadway. All rights reserved.</p>
       </footer> */}
     </>
   );
