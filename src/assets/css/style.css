@@ -449,3 +449,20 @@ html{overflow-x: hidden;}
     
 }
 /*===============Responsive Ends===============*/
+
+.mobile-call-btn {
+  display: inline-block;
+  background: #722f83;
+  color: #fff;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.mobile-call-btn:hover {
+  background: #5a2468;
+  color: #fff;
+}

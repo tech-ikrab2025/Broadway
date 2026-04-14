@@ -58,7 +58,7 @@ const handleSubmit = async (e) => {
         recaptchaToken: captchaToken
       }
     );
-    console.log("recaptchaToken:", captchaToken);
+    //console.log("recaptchaToken:", captchaToken);
     console.log("Success:", response.data);
 
     navigate("/thankyou");
@@ -515,16 +515,9 @@ const isDownloadFormValid =
       <img src="/images/logo.webp" alt="logo" />
     </a>
 
-    <div className="d-lg-none text-center mt-2">
-  <a
-    href="tel:+919832064905"
-    style={{
-      backgroundColor: "#722f83",
-      color: "#fff",
-      
-    }}
-  >
-    CALL NOW
+<div className="d-lg-none text-center mt-2">
+  <a href="tel:+919832064905" className="mobile-call-btn">
+    <i className="fa-solid fa-phone me-2"></i> CALL NOW
   </a>
 </div>
 
