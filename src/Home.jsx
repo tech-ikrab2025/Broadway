@@ -433,7 +433,7 @@ const isDownloadFormValid =
             {!captchaVerified ? (
               <div className="mb-3 d-flex justify-content-center">
                 <ReCAPTCHA
-                  sitekey="6LfR97YsAAAAAIUpNzSYkFhuS2r77MEI8sUZqJ7s"
+                  sitekey="6LfwBLcsAAAAAE9OJLjsfADD-Qtv90KStKVL22H3"
                   onChange={onCaptchaChange}
                   ref={recaptchaRef}
                 />
