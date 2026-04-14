@@ -148,7 +148,7 @@ html{overflow-x: hidden;}
 .abt_left p{font-size: 16px; line-height: 28px; color: #fff; margin: 5px 0; text-align: justify;}
 .abt_left ul{margin:10px 0;}
 .abt_left ul li {list-style: none; padding-left:25px;position: relative;color: #505050; font-size: 16px; color: #fff; margin:5px 0;}
-.abt_left ul li:before{content:"\f058";font-family:"Font Awesome 6 Free";position:absolute;left: 0;top: 0;font-weight: bold;color:#fff;}
+.abt_left ul li:before{content:"\f058";font-family:"Font Awesome 6 Free", "Font Awesome 5 Free";position:absolute;left: 0;top: 0;font-weight: bold;color:#fff;}
 .abt_left .btn_box{margin-top: 30px;}
 .abt_left .btn_box a{cursor: pointer;}
 .abt_right{width:100%;position: relative;}

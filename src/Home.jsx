@@ -1163,7 +1163,7 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
           <h3>WBRERA/A/SOU/2023/000185</h3>
 
           <ul>
-            <li>
+            <li>              
               Phone:
               <a href="tel:+919832064905">
                 <b>( +91 ) 9832064905</b>
