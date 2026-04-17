@@ -28,93 +28,93 @@ export default function Home() {
   const [captchaToken, setCaptchaToken] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const recaptchaRef = useRef();
-  const navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
   const [gclid, setGclid] = useState("");
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!isFormValid) return;
+    if (!isFormValid) return;
 
-  try {
-    const response = await axios.post(
-      "https://www.510earth.com/MicroWebsiteAPI/SaveNewLeads", // 🔴 replace 
-      {
-        CustomerName: formData.fullName,  
-        Email: formData.email, 
-        ContactNumber: formData.phone,
-        IsdCode: "91", // 🇮🇳 India
+    try {
+      const response = await axios.post(
+        "https://www.510earth.com/MicroWebsiteAPI/SaveNewLeads", // 🔴 replace 
+        {
+          CustomerName: formData.fullName,
+          Email: formData.email,
+          ContactNumber: formData.phone,
+          IsdCode: "91", // 🇮🇳 India
 
-        Message: formData.message || "",
+          Message: formData.message || "",
 
-        PropertyName: "JMC Broadway",      // ✅ hardcoded
-        PropertyId: "491",             // ✅ from hidden field
-        gclid_field: gclid || "",               // keep empty if not using ads
-        form_type: "REQ",         // or "Sidebar Form"
+          PropertyName: "JMC Broadway",      // ✅ hardcoded
+          PropertyId: "491",             // ✅ from hidden field
+          gclid_field: gclid || "",               // keep empty if not using ads
+          form_type: "REQ",         // or "Sidebar Form"
 
-        PropertyTypeId: "1",           // ask if unsure
-        rPropertyType: "Residential",  // ✅
-        SubPropertyTypeId: "1",        // ask if unsure
-        SubPropertyType: "Flat/Apartment",        
-        recaptchaToken: captchaToken
-      }
-    );
-    //console.log("recaptchaToken:", captchaToken);
-    console.log("Success:", response.data);
+          PropertyTypeId: "1",           // ask if unsure
+          rPropertyType: "Residential",  // ✅
+          SubPropertyTypeId: "1",        // ask if unsure
+          SubPropertyType: "Flat/Apartment",
+          recaptchaToken: captchaToken
+        }
+      );
+      //console.log("recaptchaToken:", captchaToken);
+      console.log("Success:", response.data);
 
-    navigate("/thankyou");
+      navigate("/thankyou");
 
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Submission failed!");
-  }
-};
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Submission failed!");
+    }
+  };
 
-const handleDownloadSubmit = async (e) => {
-  e.preventDefault();
+  const handleDownloadSubmit = async (e) => {
+    e.preventDefault();
 
-  const isValid = validateDownloadField();
-  if (!isValid) return;
+    const isValid = validateDownloadField();
+    if (!isValid) return;
 
-  try {
-    const response = await axios.post(
-      "https://www.510earth.com/MicroWebsiteAPI/SaveNewLeads", // 🔴 replace
-      {
-        CustomerName: formDownloadData.fullName,
-        Email: formDownloadData.email,
-        ContactNumber: formDownloadData.phone,
-        IsdCode: "91",
-        Message: formDownloadData.message || "",
-        PropertyName: "JMC Broadway",
-        PropertyId: "491",
-        gclid_field: gclid || "",
-        form_type: "EBRCREQ",
-        PropertyTypeId: "1",
-        rPropertyType: "Residential",
-        SubPropertyTypeId: "1",
-        SubPropertyType: "Flat/Apartment",
-        recaptchaToken: "" // optional if not using captcha here
-      }
-    );
+    try {
+      const response = await axios.post(
+        "https://www.510earth.com/MicroWebsiteAPI/SaveNewLeads", // 🔴 replace
+        {
+          CustomerName: formDownloadData.fullName,
+          Email: formDownloadData.email,
+          ContactNumber: formDownloadData.phone,
+          IsdCode: "91",
+          Message: formDownloadData.message || "",
+          PropertyName: "JMC Broadway",
+          PropertyId: "491",
+          gclid_field: gclid || "",
+          form_type: "EBRCREQ",
+          PropertyTypeId: "1",
+          rPropertyType: "Residential",
+          SubPropertyTypeId: "1",
+          SubPropertyType: "Flat/Apartment",
+          recaptchaToken: "" // optional if not using captcha here
+        }
+      );
 
-    console.log("Download form submitted:", response.data);
+      console.log("Download form submitted:", response.data);
 
-    // ✅ Download after API success
-    const link = document.createElement("a");
-    link.href = "/eBrochure/JMCBROADWAY.pdf";
-    link.download = "JMCBROADWAY.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+      // ✅ Download after API success
+      const link = document.createElement("a");
+      link.href = "/eBrochure/JMCBROADWAY.pdf";
+      link.download = "JMCBROADWAY.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-    navigate("/thankyou");
+      navigate("/thankyou");
 
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Submission failed!");
-  }
-};
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Submission failed!");
+    }
+  };
 
   const onCaptchaChange = (value) => {
     if (value) {
@@ -138,7 +138,7 @@ const handleDownloadSubmit = async (e) => {
 
   const [errors, setErrors] = useState({});
 
-const [formDownloadData, setDownloadFormData] = useState({
+  const [formDownloadData, setDownloadFormData] = useState({
     fullName: "",
     phone: "",
     email: "",
@@ -150,7 +150,7 @@ const [formDownloadData, setDownloadFormData] = useState({
   // 2. Validation Logic
   const validateField = (name, value) => {
     let error = "";
-    
+
     if (name === "fullName") {
       if (!value) error = "Please Enter Name";
       else if (!/^[A-Za-z\s]+$/.test(value)) error = "Name should only contain letters";
@@ -176,34 +176,34 @@ const [formDownloadData, setDownloadFormData] = useState({
     validateField(name, value);
   };
 
-const validateDownloadField = () => {
-  let newErrors = {};
+  const validateDownloadField = () => {
+    let newErrors = {};
 
-  // ✅ Name
-  if (!formDownloadData.fullName) {
-    newErrors.fullName = "Name is required";
-  } else if (!/^[A-Za-z\s]+$/.test(formDownloadData.fullName)) {
-    newErrors.fullName = "Name should contain only letters";
-  }
+    // ✅ Name
+    if (!formDownloadData.fullName) {
+      newErrors.fullName = "Name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(formDownloadData.fullName)) {
+      newErrors.fullName = "Name should contain only letters";
+    }
 
-  // ✅ Phone
-  if (!formDownloadData.phone) {
-    newErrors.phone = "Phone number is required";
-  } else if (!/^\d{10}$/.test(formDownloadData.phone)) {
-    newErrors.phone = "Enter valid 10 digit number";
-  }
+    // ✅ Phone
+    if (!formDownloadData.phone) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formDownloadData.phone)) {
+      newErrors.phone = "Enter valid 10 digit number";
+    }
 
-  // ✅ Email (REQUIRED)
-  if (!formDownloadData.email) {
-    newErrors.email = "Email is required";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formDownloadData.email)) {
-    newErrors.email = "Enter valid email";
-  }
+    // ✅ Email (REQUIRED)
+    if (!formDownloadData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formDownloadData.email)) {
+      newErrors.email = "Enter valid email";
+    }
 
-  downloadsetErrors(newErrors);
+    downloadsetErrors(newErrors);
 
-  return Object.keys(newErrors).length === 0;
-};
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleInputDownloadChange = (e) => {
     const { name, value } = e.target;
@@ -212,29 +212,29 @@ const validateDownloadField = () => {
   };
 
   // 3. Form Readiness Check (Required for Submit button)
-const isFormValid = 
-  /^[A-Za-z\s]+$/.test(formData.fullName) &&   // ✅ valid name only
-  /^\d{10}$/.test(formData.phone) &&           // ✅ exactly 10 digits
-  !errors.fullName && 
-  !errors.phone && 
-  !errors.email &&
-  captchaVerified;
+  const isFormValid =
+    /^[A-Za-z\s]+$/.test(formData.fullName) &&   // ✅ valid name only
+    /^\d{10}$/.test(formData.phone) &&           // ✅ exactly 10 digits
+    !errors.fullName &&
+    !errors.phone &&
+    !errors.email &&
+    captchaVerified;
 
-const isDownloadFormValid =
-  /^[A-Za-z\s]+$/.test(formDownloadData.fullName) &&
-  /^\d{10}$/.test(formDownloadData.phone) &&
-  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formDownloadData.email);
+  const isDownloadFormValid =
+    /^[A-Za-z\s]+$/.test(formDownloadData.fullName) &&
+    /^\d{10}$/.test(formDownloadData.phone) &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formDownloadData.email);
 
- const gallerySettings = {
+  const gallerySettings = {
     dots: true,
     infinite: true,
     speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,           
-    autoplaySpeed: 3000,      
+    autoplay: true,
+    autoplaySpeed: 3000,
     arrows: true,             // Keep this true
-    pauseOnHover: true,       
+    pauseOnHover: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -253,16 +253,16 @@ const isDownloadFormValid =
     ]
   };
 
- const resetDownloadForm = () => {
-  setDownloadFormData({
-    fullName: "",
-    phone: "",
-    email: "",
-    message: ""
-  });
+  const resetDownloadForm = () => {
+    setDownloadFormData({
+      fullName: "",
+      phone: "",
+      email: "",
+      message: ""
+    });
 
-  downloadsetErrors({});
-};
+    downloadsetErrors({});
+  };
 
   // Do the same for sliderSettings if you use it for the 3BHK section
   const sliderSettings = {
@@ -275,7 +275,7 @@ const isDownloadFormValid =
     autoplay: true,
     autoplaySpeed: 3000,
   };
- 
+
   const locations = [
     { icon: "fa-plane", title: "Airport", text: "Netaji Subhash Chandra Bose International Airport : 12 km" },
     // { icon: "fa-piggy-bank", title: "Bank", text: "Bandhan Bank : 0.27km" },
@@ -320,23 +320,35 @@ const isDownloadFormValid =
   }, []);
 
   useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  const gclidParam = params.get("gclid");
+    const params = new URLSearchParams(window.location.search);
+    const gclidParam = params.get("gclid");
 
-  if (gclidParam) {
-    console.log("gclid:", gclidParam);
-    setGclid(gclidParam);
+    if (gclidParam) {
+      console.log("gclid:", gclidParam);
+      setGclid(gclidParam);
 
-    // Optional: store in localStorage (recommended)
-    localStorage.setItem("gclid", gclidParam);
-  } else {
-    // fallback if user navigates internally
-    const storedGclid = localStorage.getItem("gclid");
-    if (storedGclid) {
-      setGclid(storedGclid);
+      // Optional: store in localStorage (recommended)
+      localStorage.setItem("gclid", gclidParam);
+    } else {
+      // fallback if user navigates internally
+      const storedGclid = localStorage.getItem("gclid");
+      if (storedGclid) {
+        setGclid(storedGclid);
+      }
     }
-  }
-}, []);
+  }, []);
+
+  const getImagePath = (tabName) => {
+    switch (tabName) {
+      case "Basement Floor": return "/images/basement.webp";
+      case "Ground Floor": return "/images/bhk_img1.webp";
+      case "3rd Floor": return "/images/bhk_img2.webp";
+      case "4-9th Floor": return "/images/bhk_img5.webp";
+      case "10th Floor": return "/images/bhk_img4.webp";
+      case "11th Floor": return "/images/bhk_img3.webp";
+      default: return "/images/basement.webp";
+    }
+  };
 
   return (
     <>
@@ -398,15 +410,15 @@ const isDownloadFormValid =
                 <i className="fa-solid fa-user"></i>
               </div>
               <input
-            name="fullName"
-            className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
-            placeholder="Full Name"
-            type="text"
-            value={formData.fullName}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.fullName && <small className="text-danger ps-5 mb-2 d-block">{errors.fullName}</small>}
+                name="fullName"
+                className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
+                placeholder="Full Name"
+                type="text"
+                value={formData.fullName}
+                onChange={handleInputChange}
+              />
+            </div>
+            {errors.fullName && <small className="text-danger ps-5 mb-2 d-block">{errors.fullName}</small>}
 
             {/* Phone */}
             <div className="input-group form-group">
@@ -414,16 +426,16 @@ const isDownloadFormValid =
                 <i className="fa-solid fa-phone"></i>
               </div>
               <input
-            name="phone"
-            className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
-            placeholder="Phone Number"
-            maxLength="10"
-            type="text"
-            value={formData.phone}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.phone && <small className="text-danger ps-5 mb-2 d-block">{errors.phone}</small>}
+                name="phone"
+                className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
+                placeholder="Phone Number"
+                maxLength="10"
+                type="text"
+                value={formData.phone}
+                onChange={handleInputChange}
+              />
+            </div>
+            {errors.phone && <small className="text-danger ps-5 mb-2 d-block">{errors.phone}</small>}
 
             {/* Email */}
             <div className="input-group form-group">
@@ -431,15 +443,15 @@ const isDownloadFormValid =
                 <i className="fa-solid fa-envelope"></i>
               </div>
               <input
-            name="email"
-            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            placeholder="Email Id"
-            type="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        {errors.email && <small className="text-danger ps-5 mb-2 d-block">{errors.email}</small>}
+                name="email"
+                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                placeholder="Email Id"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </div>
+            {errors.email && <small className="text-danger ps-5 mb-2 d-block">{errors.email}</small>}
 
             {/* Message */}
             <div className="input-group form-group">
@@ -471,30 +483,30 @@ const isDownloadFormValid =
             <input type="hidden" value="Residential" />
 
             {/* Submit */}
-          <button 
-          className="form_btn" 
-          type="submit" 
-          disabled={!isFormValid}
-          >
-          Submit
-          </button>
+            <button
+              className="form_btn"
+              type="submit"
+              disabled={!isFormValid}
+            >
+              Submit
+            </button>
 
-            <button 
-  type="button" 
-  className="disclaimer_btn" 
-  style={{ 
-    background: 'none', 
-    border: 'none', 
-    padding: 0,
-    display: 'block',    // Allows the button to accept auto margins
-    margin: '10px auto', // '10px' adds vertical spacing, 'auto' centers it horizontally
-    color: '#722f83',    // Optional: match your theme's purple color
-    fontSize: '13px'
-  }}
-  onClick={() => setShowDisclaimerModal(true)}
->
-  Read Disclaimer
-</button>
+            <button
+              type="button"
+              className="disclaimer_btn"
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                display: 'block',    // Allows the button to accept auto margins
+                margin: '10px auto', // '10px' adds vertical spacing, 'auto' centers it horizontally
+                color: '#722f83',    // Optional: match your theme's purple color
+                fontSize: '13px'
+              }}
+              onClick={() => setShowDisclaimerModal(true)}
+            >
+              Read Disclaimer
+            </button>
           </form>
         </div>
       </div>
@@ -529,58 +541,58 @@ const isDownloadFormValid =
           </div>
         </nav> */}
         <nav className="navbar navbar-expand-lg">
-  <div className="container d-flex justify-content-between align-items-center">
+          <div className="container d-flex justify-content-between align-items-center">
 
-    {/* LOGO */}
-    <a className="navbar-brand" href="/">
-      <img src="/images/logo.webp" alt="logo" />
-    </a>
+            {/* LOGO */}
+            <a className="navbar-brand" href="/">
+              <img src="/images/logo.webp" alt="logo" />
+            </a>
 
-<div className="d-lg-none text-center mt-2">
-  <a href="tel:+919832064905" className="mobile-call-btn">
-    <i className="fa-solid fa-phone me-2"></i> CALL NOW
-  </a>
-</div>
+            <div className="d-lg-none text-center mt-2">
+              <a href="tel:+919832064905" className="mobile-call-btn">
+                <i className="fa-solid fa-phone me-2"></i> CALL NOW
+              </a>
+            </div>
 
-    {/* HAMBURGER (ONLY MOBILE) */}
-    <div className="hamburger d-lg-none" onClick={() => setMenuOpen(!menuOpen)}>
-      <i className="fa-solid fa-bars"></i>
-    </div>
+            {/* HAMBURGER (ONLY MOBILE) */}
+            <div className="hamburger d-lg-none" onClick={() => setMenuOpen(!menuOpen)}>
+              <i className="fa-solid fa-bars"></i>
+            </div>
 
-    {/* DESKTOP MENU */}
-    <ul className="navbar-nav ms-auto d-none d-lg-flex">
-      <li><a className="nav-link" href="#">Home</a></li>
-      <li><a className="nav-link" href="#amenities">Amenities</a></li>
-      <li><a className="nav-link" href="#gallery">Gallery</a></li>
-      <li><a className="nav-link" href="#floorplans">Floor Plans</a></li>
-      {/* <li><a className="nav-link" href="#siteplan">Site Plan</a></li> */}
-      <li><a className="nav-link" href="#locationmap">Location Map</a></li>
-      <li><a className="nav-link" href="#locationadvantage">Location Advantage</a></li>
+            {/* DESKTOP MENU */}
+            <ul className="navbar-nav ms-auto d-none d-lg-flex">
+              <li><a className="nav-link" href="#">Home</a></li>
+              <li><a className="nav-link" href="#amenities">Amenities</a></li>
+              <li><a className="nav-link" href="#gallery">Gallery</a></li>
+              <li><a className="nav-link" href="#floorplans">Floor Plans</a></li>
+              {/* <li><a className="nav-link" href="#siteplan">Site Plan</a></li> */}
+              <li><a className="nav-link" href="#locationmap">Location Map</a></li>
+              <li><a className="nav-link" href="#locationadvantage">Location Advantage</a></li>
 
-      {/* Desktop Call Button */}
-      <li>
-        <a
-          className="nav-link call-btn"
-          href="tel:+919832064905"
-        >
-          <i className="fa-solid fa-phone me-0"></i> CALL NOW
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+              {/* Desktop Call Button */}
+              <li>
+                <a
+                  className="nav-link call-btn"
+                  href="tel:+919832064905"
+                >
+                  <i className="fa-solid fa-phone me-0"></i> CALL NOW
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-{menuOpen && (
-  <div className="mobile-menu d-lg-none">
-    <a href="#">Home</a>
-    <a href="#amenities">Amenities</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#floorplans">Floor Plans</a>
-    {/* <a href="#siteplan">Site Plan</a> */}
-    <a href="#locationmap">Location Map</a>
-    <a href="#locationadvantage">Location Advantage</a>
-  </div>
-)}
+        {menuOpen && (
+          <div className="mobile-menu d-lg-none">
+            <a href="#">Home</a>
+            <a href="#amenities">Amenities</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#floorplans">Floor Plans</a>
+            {/* <a href="#siteplan">Site Plan</a> */}
+            <a href="#locationmap">Location Map</a>
+            <a href="#locationadvantage">Location Advantage</a>
+          </div>
+        )}
 
 
       </header>
@@ -600,61 +612,61 @@ const isDownloadFormValid =
       {/* PRICE SECTION */}
       <section className="point_area" >
         <div className="container">
-           <div className="row justify-content-center text-center">
+          <div className="row justify-content-center text-center">
 
             <div className="col-md-4">
-  <div className="point_box d-flex align-items-center">
+              <div className="point_box d-flex align-items-center">
 
-    {/* ICON */}
-    <div className="point_icon">
-      <i className="fa-solid fa-building"></i>
-    </div>
+                {/* ICON */}
+                <div className="point_icon">
+                  <i className="fa-solid fa-building"></i>
+                </div>
 
-    {/* TEXT */}
-    <div className="point_text" style={{
-            color: "#fff",
-          }}>
-      <h3>2BHK</h3>
-      <h5>(1147- 1164 Sq. Ft.)</h5>
-      <h2>98 Lakhs</h2>
-      <p>Onwards*</p>
-    </div>
+                {/* TEXT */}
+                <div className="point_text" style={{
+                  color: "#fff",
+                }}>
+                  <h3>2BHK</h3>
+                  <h5>(1147- 1164 Sq. Ft.)</h5>
+                  <h2>98 Lakhs</h2>
+                  <p>Onwards*</p>
+                </div>
 
-  </div>
-</div>
+              </div>
+            </div>
 
-          <div className="col-md-4">
-  <div className="point_box d-flex align-items-center">
+            <div className="col-md-4">
+              <div className="point_box d-flex align-items-center">
 
-    {/* ICON */}
-    <div className="point_icon">
-      <i className="fa-solid fa-building"></i>
-    </div>
+                {/* ICON */}
+                <div className="point_icon">
+                  <i className="fa-solid fa-building"></i>
+                </div>
 
-    {/* TEXT */}
-    <div className="point_text" style={{
-            color: "#fff",
-          }}>
-      <h3>3BHK</h3>
-      <h5>(1253 - 1792 Sq. Ft.)</h5>
-      <h2>1.30 Cr</h2>
-      <p>Onwards*</p>
-    </div>
+                {/* TEXT */}
+                <div className="point_text" style={{
+                  color: "#fff",
+                }}>
+                  <h3>3BHK</h3>
+                  <h5>(1253 - 1792 Sq. Ft.)</h5>
+                  <h2>1.30 Cr</h2>
+                  <p>Onwards*</p>
+                </div>
 
-  </div>
-</div>
+              </div>
+            </div>
 
 
-          <div className="btn_box">
-            <a onClick={() => setShowModal(true)}>
-              Download Brochure
-            </a>
-          </div>
+            <div className="btn_box">
+              <a onClick={() => setShowModal(true)}>
+                Download Brochure
+              </a>
+            </div>
 
           </div>
         </div>
       </section>
-    <hr class="prophr"></hr>
+      <hr class="prophr"></hr>
       {/* OVERVIEW */}
 
       <section className="abt_back" id="overview">
@@ -750,10 +762,20 @@ const isDownloadFormValid =
               { img: "ame_icon1.webp", title: "24/7 Water Supply" },
               { img: "ame_icon2.webp", title: "Car Parking/Reserved Parking" },
               { img: "ame_icon3.webp", title: "CCTV Camera" },
-              {img: "ame_icon14.webp", title: "Lift"},
-              {img: "ame_icon22.webp", title: "Security"},
-              {img: "ame_icon12.webp", title: "Gymnasium"},
-              {img: "ame_icon23.webp", title: "Swimming Pool"}              
+              { img: "ame_icon14.webp", title: "Lift" },
+              { img: "ame_icon22.webp", title: "Security" },
+              { img: "ame_icon12.webp", title: "Gymnasium" },
+              { img: "ame_icon16.webp", title: "Commercial Zone" },
+              { img: "ame_icon7.webp", title: "Earthquake Resistance" },
+              { img: "ame_icon8.webp", title: "Firefighting Systems" },
+              { img: "ame_icon9.webp", title: "Flower Gardens" },
+              { img: "ame_icon13.webp", title: "Intercom" },
+              { img: "ame_icon15.webp", title: "Maintenance Staff" },
+              { img: "ame_icon18.webp", title: "Patio or Balcony" },
+              { img: "ame_icon19.webp", title: "Power Backup" },
+              { img: "ame_icon21.webp", title: "Rain Water Harvesting" },
+              { img: "ame_icon5.webp", title: "Vaastu Compliant" },
+              { img: "ame_icon24.webp", title: "Visitor Parking" }
             ].map((item, index) => (
               <div
                 className="col-lg-2 col-sm-4 col-6 d-flex wow bounceIn"
@@ -775,7 +797,7 @@ const isDownloadFormValid =
             <div className="moretext2">
               <div className="row">
                 {[
-                  
+
                 ].map((title, index) => (
                   <div
                     className="col-lg-2 col-sm-4 col-6 d-flex wow bounceIn"
@@ -812,195 +834,153 @@ const isDownloadFormValid =
       </section>
 
       {/* GALLERY */}
-     {/* GALLERY */}
-<section className="gallery_area" id="gallery">
-  <div className="container">
-    <div className="row">
-      <div className="col-md-12">
-        <h2 className="head">Gallery</h2>
-      </div>
-    </div>
+      {/* GALLERY */}
+      <section className="gallery_area" id="gallery">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h2 className="head">Gallery</h2>
+            </div>
+          </div>
 
-    <div className="row">
-      <div className="col-md-12">
-        <div className="gallery_slide">
-          {/* LightGallery wraps the Slider */}
-          <LightGallery 
-            speed={500} 
-            plugins={[lgThumbnail, lgZoom]}
-            elementClassNames="custom-wrapper-class"
-            // Important: This tells LightGallery to look for these links specifically
-            selector=".gallery-item" 
-          >
-            <Slider {...gallerySettings}>
-              {[1, 2, 3].map((img, index) => (
-                <div className="item" key={index}>
-                  <div className="gallerylight_box" style={{ padding: "0 10px" }}>
-                    <div className="gal_box">
-                      {/* Added className="gallery-item" to match the selector above */}
-                      <a 
-                        href={`/images/gallery${img}.webp`} 
-                        className="gallery-item"
-                        data-src={`/images/gallery${img}.webp`}
-                      >
-                        <img
-                          className="img-fluid"
-                          src={`/images/gallery${img}.webp`}
-                          alt={`Gallery ${img}`}
-                          style={{ width: "100%", borderRadius: "8px", cursor: "pointer" }}
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </LightGallery>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="gallery_slide">
+                {/* LightGallery wraps the Slider */}
+                <LightGallery
+                  speed={500}
+                  plugins={[lgThumbnail, lgZoom]}
+                  elementClassNames="custom-wrapper-class"
+                  // Important: This tells LightGallery to look for these links specifically
+                  selector=".gallery-item"
+                >
+                  <Slider {...gallerySettings}>
+                    {[1, 2, 3].map((img, index) => (
+                      <div className="item" key={index}>
+                        <div className="gallerylight_box" style={{ padding: "0 10px" }}>
+                          <div className="gal_box">
+                            {/* Added className="gallery-item" to match the selector above */}
+                            <a
+                              href={`/images/gallery${img}.webp`}
+                              className="gallery-item"
+                              data-src={`/images/gallery${img}.webp`}
+                            >
+                              <img
+                                className="img-fluid"
+                                src={`/images/gallery${img}.webp`}
+                                alt={`Gallery ${img}`}
+                                style={{ width: "100%", borderRadius: "8px", cursor: "pointer" }}
+                              />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </Slider>
+                </LightGallery>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* FLOOR PLANS */}
       <section className="floor_area" id="floorplans">
         <div className="container">
-
           <div className="row">
             <div className="col-md-12">
               <h2 className="head">Floor Plans</h2>
             </div>
           </div>
-            
+
           <div className="row">
             <div className="col-md-12">
               <article className="tabbed-content">
                 <div className="row">
-
                   {/* LEFT TAB MENU */}
                   <div className="col-lg-3 col-sm-4">
-  <nav>
-    <ul style={{ listStyle: "none", padding: 0 }}>
-{/* {["Basement Floor","Ground Floor", "3rd Floor", "4-9th Floor", "10th Floor", "11th Floor"] */}
-      {/* {["2bhk", "3bhk", "4bhk"].map((tab) => ( */}
-      {["Basement Floor","Ground Floor","3rd Floor", "4-9th Floor", "10th Floor", "11th Floor"].map((tab) => (
-        <li key={tab} style={{ marginBottom: "15px" }}>
-          <button
-            onClick={() => setActiveTab(tab)}
-            style={{
-              width: "100%",
-              padding: "15px",
-              fontSize: "18px",
-              fontWeight: "600",
-              border: "none",
-              cursor: "pointer",
-              textAlign: "left",
-              background:
-                activeTab === tab ? "#722f83" : "#ddd",
-              color:
-                activeTab === tab ? "#fff" : "#000",
-              borderRadius: "4px",
-              position: "relative"
-            }}
-          >
-            {tab.toUpperCase()}
+                    <nav>
+                      <ul style={{ listStyle: "none", padding: 0 }}>
+                        {["Basement Floor", "Ground Floor", "3rd Floor", "4-9th Floor", "10th Floor", "11th Floor"].map((tab) => (
+                          <li key={tab} style={{ marginBottom: "15px" }}>
+                            <button
+                              onClick={() => setActiveTab(tab)}
+                              style={{
+                                width: "100%",
+                                padding: "15px",
+                                fontSize: "18px",
+                                fontWeight: "600",
+                                border: "none",
+                                cursor: "pointer",
+                                textAlign: "left",
+                                background: activeTab === tab ? "#722f83" : "#ddd",
+                                color: activeTab === tab ? "#fff" : "#000",
+                                borderRadius: "4px",
+                                position: "relative"
+                              }}
+                            >
+                              {tab.toUpperCase()}
+                              {activeTab === tab && (
+                                <span style={{
+                                  position: "absolute", right: "-10px", top: "50%",
+                                  transform: "translateY(-50%)", width: "0", height: "0",
+                                  borderTop: "10px solid transparent", borderBottom: "10px solid transparent",
+                                  borderLeft: "10px solid #722f83"
+                                }}></span>
+                              )}
+                            </button>
 
-            {/* Triangle effect like screenshot */}
-            {activeTab === tab && (
-              <span
-                style={{
-                  position: "absolute",
-                  right: "-10px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  width: "0",
-                  height: "0",
-                  borderTop: "10px solid transparent",
-                  borderBottom: "10px solid transparent",
-                  borderLeft: "10px solid #722f83"
-                }}
-              ></span>
-            )}
-          </button>
-        </li>
-      ))}
+                            {/* MOBILE VIEW IMAGE: Shows right below the button on small screens */}
+                            {activeTab === tab && (
+                              <div className="d-block d-sm-none mt-3">
+                                <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
+                                  <a href={getImagePath(tab)}>
+                                    <img
+                                      src={getImagePath(tab)}
+                                      className="img-fluid"
+                                      alt={tab}
+                                      style={{ cursor: "pointer", borderRadius: "8px", border: "1px solid #722f83" }}
+                                    />
+                                  </a>
+                                </LightGallery>
+                              </div>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  </div>
 
-    </ul>
-  </nav>
-
-  <div style={{ marginTop: "40px", color: "#fff" }}>
-    <h3 style={{ fontSize: "20px", fontWeight: "600" }}>
-      {/* Total Floors : G + 28 */}
-    </h3>
-  </div>
-</div>
-
-                  {/* RIGHT CONTENT */}
-                <div className="col-lg-9 col-sm-8">
-  <div className="item">
-    <div className="row align-items-center">
-
-      <div className="col-md-6">
-        <div className="bhk_details">
-          <h3>{activeTab}</h3>
-
-          <ul>
-            <li>
-              {/* <i className="fa-solid fa-building"></i> */}
-              {activeTab === "Basement Floor"}
-              {activeTab === "Ground Floor" }
-              {activeTab === "3rd Floor" }
-              {activeTab === "4-9th Floor" }
-              {activeTab === "10th Floor" }
-              {activeTab === "11th Floor" }
-            </li>
-          </ul>
-
-        </div>
-      </div>
-
-      <div className="col-md-6">
-        <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
-          <a 
-            href={
-              activeTab === "Basement Floor" ? "/images/basement.webp" :
-              activeTab === "Ground Floor" ? "/images/bhk_img1.webp" :
-              activeTab === "3rd Floor" ? "/images/bhk_img2.webp" :
-              activeTab === "4-9th Floor" ? "/images/bhk_img5.webp" :
-              activeTab === "10th Floor" ? "/images/bhk_img4.webp" :
-              "/images/bhk_img3.webp"
-            }
-          >
-            <img
-              src={
-                activeTab === "Basement Floor" ? "/images/basement.webp" :
-                activeTab === "Ground Floor" ? "/images/bhk_img1.webp" :
-                activeTab === "3rd Floor" ? "/images/bhk_img2.webp" :
-                activeTab === "4-9th Floor" ? "/images/bhk_img5.webp" :
-                activeTab === "10th Floor" ? "/images/bhk_img4.webp" :
-                "/images/bhk_img3.webp"
-              }
-              className="img-fluid"
-              alt={activeTab}
-              style={{ cursor: "pointer" }}
-            />
-          </a>
-        </LightGallery>
-      </div>
-
-    </div>
-  </div>
-</div>
-
+                  {/* DESKTOP CONTENT: Hidden on mobile to avoid duplication */}
+                  <div className="col-lg-9 col-sm-8 d-none d-sm-block">
+                    <div className="item">
+                      <div className="row align-items-center">
+                        <div className="col-md-12">
+                          <div className="bhk_details">
+                            <h3>{activeTab}</h3>
+                          </div>
+                          <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
+                            <a href={getImagePath(activeTab)}>
+                              <img
+                                src={getImagePath(activeTab)}
+                                className="img-fluid"
+                                alt={activeTab}
+                                style={{ cursor: "pointer" }}
+                              />
+                            </a>
+                          </LightGallery>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </article>
             </div>
           </div>
-
         </div>
       </section>
 
-    <hr class="prophr"></hr>
+      <hr class="prophr"></hr>
 
       {/* <section className="site_area" id="siteplan">
         <div className="container">
@@ -1030,7 +1010,7 @@ const isDownloadFormValid =
         </div>
       </section> */}
 
-       <hr class="prophr"></hr>
+      <hr class="prophr"></hr>
 
       <section className="site_area location_area" id="locationmap">
         <div className="container">
@@ -1045,18 +1025,18 @@ const isDownloadFormValid =
               data-wow-delay="0.1s"
             >
               <div className="site_light">
-          {/* Wrap with LightGallery */}
-          <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
-            <a href="/images/map_img.webp">
-              <img
-                className="img-responsive"
-                src="/images/map_img.webp"
-                alt="Location Map"
-                style={{ cursor: "pointer", width: '100%' }}
-              />
-            </a>
-          </LightGallery>
-        </div>
+                {/* Wrap with LightGallery */}
+                <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
+                  <a href="/images/map_img.webp">
+                    <img
+                      className="img-responsive"
+                      src="/images/map_img.webp"
+                      alt="Location Map"
+                      style={{ cursor: "pointer", width: '100%' }}
+                    />
+                  </a>
+                </LightGallery>
+              </div>
             </div>
 
           </div>
@@ -1094,79 +1074,79 @@ const isDownloadFormValid =
       </section>
 
       {/* DISCLAIMER POPUP MODAL */}
-{showDisclaimerModal && (
-  <div className="modal fade show modal_body_area d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-    <div className="modal-dialog modal-dialog-centered">
-      <div className="modal-content">
-        <div className="modal-header" style={{ background: '#722f83', color: '#fff' }}>
-          <h5 className="modal-title">Disclaimer</h5>
-          <button
-            type="button"
-            className="btn-close btn-close-white"
-            onClick={() => setShowDisclaimerModal(false)}
-          ></button>
+      {showDisclaimerModal && (
+        <div className="modal fade show modal_body_area d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header" style={{ background: '#722f83', color: '#fff' }}>
+                <h5 className="modal-title">Disclaimer</h5>
+                <button
+                  type="button"
+                  className="btn-close btn-close-white"
+                  onClick={() => setShowDisclaimerModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body" style={{ padding: '20px', fontSize: '14px', lineHeight: '1.6' }}>
+                <p>
+                  The data (based on the search query performed), on the webpages of jmcbroadway.com has been made available for informational purposes only and no representation or warranty is expressly or impliedly given as to its accuracy. Any investment decisions that you take should not be based relying solely on the information that is available on the website jmcbroadway.com or downloaded from it. Nothing contained herein shall be deemed to constitute legal advice, solicitation, invitation to acquire by the developer/builder or any other entity.
+
+                  You are advised to visit the relevant HIRA / RERA website directly to know more about the project and check all the information before taking any decision based on the contents displayed on the website jmcbroadway.com. If you have any question or want to share feedback, feel free to write to us at 510earthdotcom@gmail.com. Trademarks belong to the respective owners.Please note, that we will not be accepting any bookings or allotments based on the images, material, stock photography, projections, details, descriptions that are currently available and/or displayed on the Website. We advise you to contact our Support Team for further information.
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShowDisclaimerModal(false)}
+                  style={{ background: '#722f83', border: 'none' }}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="modal-body" style={{ padding: '20px', fontSize: '14px', lineHeight: '1.6' }}>
-          <p>
-            The data (based on the search query performed), on the webpages of jmcbroadway.com has been made available for informational purposes only and no representation or warranty is expressly or impliedly given as to its accuracy. Any investment decisions that you take should not be based relying solely on the information that is available on the website jmcbroadway.com or downloaded from it. Nothing contained herein shall be deemed to constitute legal advice, solicitation, invitation to acquire by the developer/builder or any other entity.
+      )}
 
-You are advised to visit the relevant HIRA / RERA website directly to know more about the project and check all the information before taking any decision based on the contents displayed on the website jmcbroadway.com. If you have any question or want to share feedback, feel free to write to us at 510earthdotcom@gmail.com. Trademarks belong to the respective owners.Please note, that we will not be accepting any bookings or allotments based on the images, material, stock photography, projections, details, descriptions that are currently available and/or displayed on the Website. We advise you to contact our Support Team for further information.
-          </p>
+      <section className="abt_back" id="disclaimer">
+        <div className="container">
+          <div className="row">
+            <div
+              className="col-md-12 d-flex wow bounceInLeft"
+              data-wow-delay="0.1s"
+            >
+              <div className="abt_left autho_area">
+
+                <h2 className="head">Authorised Channel Partner</h2>
+
+                <h3>WBRERA/A/SOU/2023/000185</h3>
+
+                <ul>
+                  <li>
+                    Phone:
+                    <a href="tel:+919832064905">
+                      <b>( +91 ) 9832064905</b>
+                    </a>
+                  </li>
+
+                  <li>
+                    This site is for information purpose only and should not be treated as the official information.
+                  </li>
+
+                  <li>
+                    Project RERA Registration No:{" "}
+                    <b>WBRERA/P/NOR/2024/001096</b>
+                  </li>
+                </ul>
+
+                <p>
+                  Disclaimer: The information provided is for reference purposes only and does not constitute an offer to use any of our services. The prices mentioned are subject to change without prior notice, and the availability of the properties may vary. The images provided are for illustrative purposes only. This is the official website of our authorized marketing partner. We may share your data with RERA-registered brokers or companies for further processing. Moreover, we may send you updates to the email ID or mobile number registered with us. All rights are reserved.
+                </p>
+
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="modal-footer">
-          <button 
-            className="btn btn-secondary" 
-            onClick={() => setShowDisclaimerModal(false)}
-            style={{ background: '#722f83', border: 'none' }}
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
-
-<section className="abt_back" id="disclaimer">
-  <div className="container">
-    <div className="row">
-      <div 
-        className="col-md-12 d-flex wow bounceInLeft" 
-        data-wow-delay="0.1s"
-      >
-        <div className="abt_left autho_area">
-          
-          <h2 className="head">Authorised Channel Partner</h2>
-          
-          <h3>WBRERA/A/SOU/2023/000185</h3>
-
-          <ul>
-            <li>              
-              Phone:
-              <a href="tel:+919832064905">
-                <b>( +91 ) 9832064905</b>
-              </a>
-            </li>
-
-            <li>
-              This site is for information purpose only and should not be treated as the official information.
-            </li>
-
-            <li>
-              Project RERA Registration No:{" "}
-              <b>WBRERA/P/NOR/2024/001096</b>
-            </li>
-          </ul>
-
-          <p>
-            Disclaimer: The information provided is for reference purposes only and does not constitute an offer to use any of our services. The prices mentioned are subject to change without prior notice, and the availability of the properties may vary. The images provided are for illustrative purposes only. This is the official website of our authorized marketing partner. We may share your data with RERA-registered brokers or companies for further processing. Moreover, we may send you updates to the email ID or mobile number registered with us. All rights are reserved.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       <section className="footer_area">
         <div className="container">
@@ -1174,11 +1154,11 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
             <div className="col-md-12">
               <ul>
                 <li>
-                <Link to="/privacypolicy">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link to="/termsofuse">Terms Of Use</Link>
-              </li>
+                  <Link to="/privacypolicy">Privacy Policy</Link>
+                </li>
+                <li>
+                  <Link to="/termsofuse">Terms Of Use</Link>
+                </li>
               </ul>
               <div className="copy_area">
                 <div className="row">
@@ -1197,15 +1177,15 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
           </div>
         </div>
       </section>
-<div id="whatsAppDiv" className="whatsapp_area">
-    <a 
-      href="https://api.whatsapp.com/send?phone=919832064905&text=Hi there, Interest In JMC Broadway Property!" 
-      target="_blank" 
-      rel="noopener noreferrer"
-    >
-        <img src="/images/whatsapp_btn.png" alt="WhatsApp" />
-    </a>
-</div>
+      <div id="whatsAppDiv" className="whatsapp_area">
+        <a
+          href="https://api.whatsapp.com/send?phone=919832064905&text=Hi there, Interest In JMC Broadway Property!"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="/images/whatsapp_btn.png" alt="WhatsApp" />
+        </a>
+      </div>
       {/* POPUP MODAL */}
       {/* BUTTON TO OPEN MODAL */}
       {/* <button className="btn btn-primary" onClick={() => setShowModal(true)}>
@@ -1236,10 +1216,10 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
 
                 <button
                   className="btn-close"
-                 onClick={() => {
-                          setShowModal(false);
-                          resetDownloadForm();
-                        }}
+                  onClick={() => {
+                    setShowModal(false);
+                    resetDownloadForm();
+                  }}
                 ></button>
               </div>
 
@@ -1277,43 +1257,43 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
                     {/* NAME */}
                     <div className="col-md-12 mb-2">
                       <input
-            name="fullName"
-            className={`form-control ${downloaderrors.fullName ? 'is-invalid' : ''}`}
-            placeholder="Full Name"
-            type="text"
-            value={formDownloadData.fullName}
-            onChange={handleInputDownloadChange}
-          />
-        </div>
-        {downloaderrors.fullName && <small className="text-danger ps-5 mb-2 d-block">{downloaderrors.fullName}</small>}
+                        name="fullName"
+                        className={`form-control ${downloaderrors.fullName ? 'is-invalid' : ''}`}
+                        placeholder="Full Name"
+                        type="text"
+                        value={formDownloadData.fullName}
+                        onChange={handleInputDownloadChange}
+                      />
+                    </div>
+                    {downloaderrors.fullName && <small className="text-danger ps-5 mb-2 d-block">{downloaderrors.fullName}</small>}
 
 
                     {/* PHONE */}
                     <div className="col-md-6 mb-2">
                       <input
-            name="phone"
-            className={`form-control ${downloaderrors.phone ? 'is-invalid' : ''}`}
-            placeholder="Phone Number"
-            maxLength="10"
-            type="text"
-            value={formDownloadData.phone}
-            onChange={handleInputDownloadChange}
-          />
-        </div>
-        {downloaderrors.phone && <small className="text-danger ps-5 mb-2 d-block">{downloaderrors.phone}</small>}
+                        name="phone"
+                        className={`form-control ${downloaderrors.phone ? 'is-invalid' : ''}`}
+                        placeholder="Phone Number"
+                        maxLength="10"
+                        type="text"
+                        value={formDownloadData.phone}
+                        onChange={handleInputDownloadChange}
+                      />
+                    </div>
+                    {downloaderrors.phone && <small className="text-danger ps-5 mb-2 d-block">{downloaderrors.phone}</small>}
 
                     {/* EMAIL */}
                     <div className="col-md-6 mb-2">
-                     <input
-            name="email"
-            className={`form-control ${downloaderrors.email ? 'is-invalid' : ''}`}
-            placeholder="Email Id"
-            type="email"
-            value={formDownloadData.email}
-            onChange={handleInputDownloadChange}
-          />
-        </div>
-        {downloaderrors.email && <small className="text-danger ps-5 mb-2 d-block">{downloaderrors.email}</small>}
+                      <input
+                        name="email"
+                        className={`form-control ${downloaderrors.email ? 'is-invalid' : ''}`}
+                        placeholder="Email Id"
+                        type="email"
+                        value={formDownloadData.email}
+                        onChange={handleInputDownloadChange}
+                      />
+                    </div>
+                    {downloaderrors.email && <small className="text-danger ps-5 mb-2 d-block">{downloaderrors.email}</small>}
 
                     {/* MESSAGE */}
                     <div className="col-md-12 mb-2">
@@ -1322,14 +1302,14 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
                         placeholder="Message"
                         rows="2"
                       ></textarea> */}
-<textarea
-  name="message"
-  className="form-control"
-  rows="2"
-  placeholder="Message (if required)"
-  value={formData.message}
-  onChange={handleInputChange}
-/>
+                      <textarea
+                        name="message"
+                        className="form-control"
+                        rows="2"
+                        placeholder="Message (if required)"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                      />
 
 
                     </div>
