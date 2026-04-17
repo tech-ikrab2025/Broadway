@@ -291,7 +291,7 @@ const isDownloadFormValid =
     // { icon: "fa-bacon", title: "Public Park", text: "Lake View Children Park : 0.40km" },
     { icon: "fa-train", title: "Railway Station", text: "Bidhannagar Railway Station : 6 km" },
     { icon: "fa-chalkboard-user", title: "School", text: "Globsyn Business School : 2.3 km" },
-    // { icon: "fa-laptop", title: "Tech Park", text: "P S Srijan Tech Park : 14km" },
+    { icon: "fa-laptop", title: "Tech Park", text: "Wipro Campus : 300 m" },
     // { icon: "fa-gopuram", title: "Temple", text: "Baba Lokenath Temple : 0.30km" },
     { icon: "fa-building-columns", title: "University", text: "Techno India University : 1.5km" }
   ];
@@ -553,7 +553,7 @@ const isDownloadFormValid =
       <li><a className="nav-link" href="#amenities">Amenities</a></li>
       <li><a className="nav-link" href="#gallery">Gallery</a></li>
       <li><a className="nav-link" href="#floorplans">Floor Plans</a></li>
-      <li><a className="nav-link" href="#siteplan">Site Plan</a></li>
+      {/* <li><a className="nav-link" href="#siteplan">Site Plan</a></li> */}
       <li><a className="nav-link" href="#locationmap">Location Map</a></li>
       <li><a className="nav-link" href="#locationadvantage">Location Advantage</a></li>
 
@@ -576,7 +576,7 @@ const isDownloadFormValid =
     <a href="#amenities">Amenities</a>
     <a href="#gallery">Gallery</a>
     <a href="#floorplans">Floor Plans</a>
-    <a href="#siteplan">Site Plan</a>
+    {/* <a href="#siteplan">Site Plan</a> */}
     <a href="#locationmap">Location Map</a>
     <a href="#locationadvantage">Location Advantage</a>
   </div>
@@ -615,6 +615,7 @@ const isDownloadFormValid =
             color: "#fff",
           }}>
       <h3>2BHK</h3>
+      <h5>(1147- 1164 Sq. Ft.)</h5>
       <h2>98 Lakhs</h2>
       <p>Onwards*</p>
     </div>
@@ -635,6 +636,7 @@ const isDownloadFormValid =
             color: "#fff",
           }}>
       <h3>3BHK</h3>
+      <h5>(1253 - 1792 Sq. Ft.)</h5>
       <h2>1.30 Cr</h2>
       <p>Onwards*</p>
     </div>
@@ -679,14 +681,12 @@ const isDownloadFormValid =
                   <li>High-quality bathroom fittings.</li>
                   <li>Convenient location.</li>
                 </ul>
-
                 <p>
                   JMC Broadway, located in Saltlake Sector V, is a prestigious residential
-                  property offering a range of 2, 3, and 4 BHK flats. It blends luxury
+                  property offering a range of 2BHK and 3BHK flats. It blends luxury
                   and affordability seamlessly, making it an attractive choice for
                   homebuyers.
                 </p>
-
                 {/* Hidden / Expand Content */}
                 {readMore && (
                   <div className="moretext">
@@ -753,9 +753,7 @@ const isDownloadFormValid =
               {img: "ame_icon14.webp", title: "Lift"},
               {img: "ame_icon22.webp", title: "Security"},
               {img: "ame_icon12.webp", title: "Gymnasium"},
-              // { img: "ame_icon4.webp", title: "Children's Play Area" },
-              // { img: "ame_icon5.webp", title: "Club House" },
-              // { img: "ame_icon6.webp", title: "Cycling & Jogging Track" }
+              {img: "ame_icon23.webp", title: "Swimming Pool"}              
             ].map((item, index) => (
               <div
                 className="col-lg-2 col-sm-4 col-6 d-flex wow bounceIn"
@@ -777,24 +775,7 @@ const isDownloadFormValid =
             <div className="moretext2">
               <div className="row">
                 {[
-                  // "Earthquake Resistance",
-                  // "Firefighting Systems",
-                  // "Flower Gardens",
-                  // "Game Room & Lounge",
-                  // "Gated Access",
-                  // "Gymnasium",
-                  // "Intercom",
-                  // "Lift",
-                  // "Maintenance Staff",
-                  // "Multipurpose Hall",
-                  // "Park",
-                  // "Patio or Balcony",
-                  // "Power Backup",
-                  // "Private Spa",
-                  // "Rain Water Harvesting",
-                  // "Security",
-                  // "Swimming Pool",
-                  // "Visitor Parking"
+                  
                 ].map((title, index) => (
                   <div
                     className="col-lg-2 col-sm-4 col-6 d-flex wow bounceIn"
@@ -852,7 +833,7 @@ const isDownloadFormValid =
             selector=".gallery-item" 
           >
             <Slider {...gallerySettings}>
-              {[1, 2, 3, 4].map((img, index) => (
+              {[1, 2, 3].map((img, index) => (
                 <div className="item" key={index}>
                   <div className="gallerylight_box" style={{ padding: "0 10px" }}>
                     <div className="gal_box">
@@ -1021,20 +1002,17 @@ const isDownloadFormValid =
 
     <hr class="prophr"></hr>
 
-      <section className="site_area" id="siteplan">
+      {/* <section className="site_area" id="siteplan">
         <div className="container">
           <div className="row">
-
             <div className="col-md-12">
               <h2 className="head">Site Plan</h2>
             </div>
-
             <div
               className="col-md-8 offset-md-2 wow fadeInDown"
               data-wow-delay="0.1s"
             >
-              <div className="site_light">
-          {/* Wrap with LightGallery */}
+              <div className="site_light">          
           <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
             <a href="/images/site_plan.webp">
               <img
@@ -1050,7 +1028,7 @@ const isDownloadFormValid =
 
           </div>
         </div>
-      </section>
+      </section> */}
 
        <hr class="prophr"></hr>
 
@@ -1176,7 +1154,7 @@ You are advised to visit the relevant HIRA / RERA website directly to know more 
 
             <li>
               Project RERA Registration No:{" "}
-              <b>WBRERA/P/NOR/2023/000227</b>
+              <b>WBRERA/P/NOR/2024/001096</b>
             </li>
           </ul>
 
