@@ -364,7 +364,6 @@ export default function Home() {
         <div className="toggle" onClick={toggleSidebar}>
           <span id="Enq_btn">ENQUIRE NOW</span>
         </div>
-
         <div className="scroll">
           <div className="row">
             <div className="col-lg-4 col-sm-12">
@@ -372,14 +371,12 @@ export default function Home() {
                 <img src="/images/logo.webp" alt="JMC Broadway E-Brochure" />
               </div>
             </div>
-
             <div className="col-lg-8 col-sm-12">
               <h6 className="modal-head">
                 Are you interested about <span>JMC Broadway?</span>
               </h6>
             </div>
           </div>
-
           <div className="row sidebar_modal_img">
             <div className="col-4 text-center">
               <img src="/images/call_back.jpg" alt="Instant Call Back" />
@@ -1127,21 +1124,17 @@ export default function Home() {
                       <b>( +91 ) 9832064905</b>
                     </a>
                   </li>
-
                   <li>
                     This site is for information purpose only and should not be treated as the official information.
                   </li>
-
                   <li>
                     Project RERA Registration No:{" "}
                     <b>WBRERA/P/NOR/2024/001096</b>
                   </li>
                 </ul>
-
                 <p>
                   Disclaimer: The information provided is for reference purposes only and does not constitute an offer to use any of our services. The prices mentioned are subject to change without prior notice, and the availability of the properties may vary. The images provided are for illustrative purposes only. This is the official website of our authorized marketing partner. We may share your data with RERA-registered brokers or companies for further processing. Moreover, we may send you updates to the email ID or mobile number registered with us. All rights are reserved.
                 </p>
-
               </div>
             </div>
           </div>
@@ -1310,27 +1303,21 @@ export default function Home() {
                         value={formData.message}
                         onChange={handleInputChange}
                       />
-
-
                     </div>
-
                     {/* HIDDEN FIELDS */}
                     <input type="hidden" value="491" />
                     <input type="hidden" value="JMC Broadway" />
                     <input type="hidden" value="Residential" />
                     <input type="hidden" value="Flat/Apartment" />
-
                     {/* SUBMIT */}
                     <div className="col-md-12 text-center mt-2">
                       <button className="form_btn" type="submit">
                         Submit & Download
                       </button>
                     </div>
-
                   </div>
                 </form>
               </div>
-
             </div>
           </div>
         </div>
