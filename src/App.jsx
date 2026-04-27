@@ -27,7 +27,13 @@ function App() {
       <Routes>
         {/* This shows Home by default at the root URL (/) */}
         <Route path="/" element={<Home />} />
-        
+        <Route path="/amenities" element={<Home />} />
+        <Route path="/gallery" element={<Home />} />
+        <Route path="/floorplans" element={<Home />} />
+        <Route path="/locationmap" element={<Home />} />
+        <Route path="/locationadvantage" element={<Home />} />
+
+
         {/* This shows Privacy Policy only when the URL is /privacypolicy */}
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/thankyou" element={<ThankYou />} />

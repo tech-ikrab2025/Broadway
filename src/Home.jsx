@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import SliderComponent from "react-slick";
 import "slick-carousel/slick/slick.css"; // Import Slick CSS
 import "slick-carousel/slick/slick-theme.css"; // Import Slick Theme CSS
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import LightGallery from "lightgallery/react";
 import "lightgallery/css/lightgallery.css";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
@@ -16,7 +16,6 @@ import "lightgallery/css/lg-zoom.css";
 import axios from "axios";
 
 export default function Home() {
-
   const [readMore, setReadMore] = useState(false);
   const [showMoreAmenities, setShowMoreAmenities] = useState(false);
   // const [activeTab, setActiveTab] = useState("2bhk");
@@ -338,6 +337,47 @@ export default function Home() {
     }
   }, []);
 
+  const location = useLocation();
+
+useEffect(() => {
+  const path = location.pathname.replace("/", "");
+
+  if (path) {
+    setTimeout(() => {
+      const section = document.getElementById(path);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 300); // wait for DOM render
+  }
+}, [location]);
+
+useEffect(() => {
+  window.onpopstate = () => {
+    const path = window.location.pathname.replace("/", "");
+    if (path) {
+      const section = document.getElementById(path);
+      section?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+}, []);
+
+useEffect(() => {
+  const handleScroll = () => {
+    const header = document.querySelector(".head_nav");
+
+    if (window.scrollY > 50) {
+      header.classList.add("sticky_menu");
+    } else {
+      header.classList.remove("sticky_menu");
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
   const getImagePath = (tabName) => {
     switch (tabName) {
       case "Basement Floor": return "/images/basement.webp";
@@ -349,6 +389,17 @@ export default function Home() {
       default: return "/images/basement.webp";
     }
   };
+
+  const handleScroll = (id) => {
+  const section = document.getElementById(id);
+
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+
+    // ✅ Change URL WITHOUT #
+    window.history.pushState(null, "", `/${id}`);
+  }
+};
 
   return (
     <>
@@ -558,14 +609,18 @@ export default function Home() {
 
             {/* DESKTOP MENU */}
             <ul className="navbar-nav ms-auto d-none d-lg-flex">
-              <li><a className="nav-link" href="#">Home</a></li>
-              <li><a className="nav-link" href="#amenities">Amenities</a></li>
+              {/* <li><a className="nav-link" href="#">Home</a></li>
+              <li><a className="nav-link" href="#amenities">Amenities</a></li>              
               <li><a className="nav-link" href="#gallery">Gallery</a></li>
-              <li><a className="nav-link" href="#floorplans">Floor Plans</a></li>
-              {/* <li><a className="nav-link" href="#siteplan">Site Plan</a></li> */}
+              <li><a className="nav-link" href="#floorplans">Floor Plans</a></li>              
               <li><a className="nav-link" href="#locationmap">Location Map</a></li>
-              <li><a className="nav-link" href="#locationadvantage">Location Advantage</a></li>
-
+              <li><a className="nav-link" href="#locationadvantage">Location Advantage</a></li> */}
+              <li><a className="nav-link" href="https://jmcbroadway.com">Home</a></li>
+              <li><a className="nav-link" onClick={() => handleScroll("amenities")}>Amenities</a></li>
+              <li><a className="nav-link" onClick={() => handleScroll("gallery")}>Gallery</a></li>
+              <li><a className="nav-link" onClick={() => handleScroll("floorplans")}>Floor Plans</a></li>
+              <li><a className="nav-link" onClick={() => handleScroll("locationmap")}>Location Map</a></li>
+              <li><a className="nav-link" onClick={() => handleScroll("locationadvantage")}>Location Advantage</a></li>
               {/* Desktop Call Button */}
               <li>
                 <a
@@ -581,13 +636,18 @@ export default function Home() {
 
         {menuOpen && (
           <div className="mobile-menu d-lg-none">
-            <a href="#">Home</a>
+            <a href="https://jmcbroadway.com">Home</a>
+            <a onClick={() => handleScroll("amenities")}>Amenities</a>
+            <a onClick={() => handleScroll("gallery")}>Gallery</a>
+            <a onClick={() => handleScroll("floorplans")}>Floor Plans</a>
+            <a onClick={() => handleScroll("locationmap")}>Location Map</a>
+            <a onClick={() => handleScroll("locationadvantage")}>Location Advantage</a>
+            {/* <a href="#">Home</a>
             <a href="#amenities">Amenities</a>
             <a href="#gallery">Gallery</a>
-            <a href="#floorplans">Floor Plans</a>
-            {/* <a href="#siteplan">Site Plan</a> */}
+            <a href="#floorplans">Floor Plans</a>            
             <a href="#locationmap">Location Map</a>
-            <a href="#locationadvantage">Location Advantage</a>
+            <a href="#locationadvantage">Location Advantage</a> */}
           </div>
         )}
 
@@ -663,7 +723,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <hr class="prophr"></hr>
+      <hr className="prophr"></hr>
       {/* OVERVIEW */}
 
       <section className="abt_back" id="overview">
@@ -977,7 +1037,7 @@ export default function Home() {
         </div>
       </section>
 
-      <hr class="prophr"></hr>
+      <hr className="prophr"></hr>
 
       {/* <section className="site_area" id="siteplan">
         <div className="container">
@@ -1007,7 +1067,7 @@ export default function Home() {
         </div>
       </section> */}
 
-      <hr class="prophr"></hr>
+      <hr className="prophr"></hr>
 
       <section className="site_area location_area" id="locationmap">
         <div className="container">

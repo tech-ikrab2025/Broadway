@@ -14,8 +14,13 @@ html{overflow-x: hidden;}
 .head_nav ul li a{color:#000; font-size:16px; line-height:70px; text-transform:uppercase;position:relative;font-weight: 600;}
 .head_nav ul li a:hover, .head_nav ul li a.active, .head_nav ul li a:focus{color: #5d1f7b;}
 .navbar-expand-lg .navbar-nav .nav-link{padding:0 10px;}
-.sticky_menu{position: fixed;left: 0;top:0; width: 100%;z-index: 10;}
-
+.sticky_menu{position: fixed;left: 0;top:0; width: 100%;z-index: 9999;}
+.sticky_menu nav {
+  padding: 2px 0;
+}
+.sticky_menu .navbar-brand img {
+  height: 50px;
+}
 
 .whatsapp_area{
     position: fixed;
